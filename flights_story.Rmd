@@ -1,0 +1,41 @@
+ title: "Homework3 Історія з даних про літаки"     
+output: html_document
+---
+  
+```{r}
+
+library(nycflights13)
+data(package = "nycflights13")
+
+#Як залежить затримка літаків від дня вильоту
+library(tidyverse)
+
+
+flights
+
+df <- flights
+
+df %>%
+  filter(!is.na(dep_delay)) %>% 
+  group_by(day)%>%
+  summarise(
+    day_dep_delay = median(dep_delay)
+  ) -> df1
+
+df1 %>%
+  ggplot() + geom_point(aes(x = day, y = day_dep_delay, color = day_dep_delay))  
+
+
+```
+
+
+
+Ми бачимо, що найбільше літаки запізнюються з вильотом в 5-их числах місяця, а вчасно вилітають десь 22-23 числа. 
+Затримка вильоту на 1 годину найчастіше буває між 7 та 13 числом, а на 2 години - після 25-го числа.
+
+
+
+
+
+
+
